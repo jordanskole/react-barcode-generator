@@ -1,23 +1,16 @@
-/**
- * @class ExampleComponent
- */
+import React, { useEffect } from 'react'
+import JsBarcode, { BaseOptions } from 'jsbarcode'
 
-import * as React from 'react'
+export type Props = {
+  barcode: string;
+  options: BaseOptions;
+}
 
-import styles from './styles.css'
-
-export type Props = { text: string }
-
-export default class ExampleComponent extends React.Component<Props> {
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
+export const Barcode: React.FC<Props> = ({ barcode, options }) => {
+  useEffect(() => {
+    JsBarcode('#barcode', barcode, {...options})
+  })
+  return (
+    <svg id="barcode"></svg>
+  )
 }
